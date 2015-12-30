@@ -14,7 +14,7 @@
 #define DEGREES_TO_RADIANS(degrees)  ((pi * degrees)/180)         //转化为度
 
 @interface CircleView ()
-@property (nonatomic, assign) NSString *text;
+@property (nonatomic, copy) NSString *percentText;
 @property (nonatomic, assign) CGFloat endDegree;
 @property (nonatomic, strong) CAShapeLayer *animtionLayer;
 @property (nonatomic, strong) CAShapeLayer *edgeLayer;
@@ -34,7 +34,7 @@
 
 - (void)setupDefault
 {
-    _text = @"0%";
+    _percentText = @"0%";
     _lineWidth = 25;
     _cirleColor = RGBA(116, 201, 0, 1);
     _percentFont = [UIFont fontWithName:@"Arial"size:17];
@@ -71,7 +71,7 @@
     self.endDegree = DEGREES_DefaultStart(percent/100.0 * 360);
     [self drawBackCircle];
     [self addPercentCircle];
-    _text = [NSString stringWithFormat:@"%ld%%",percent];
+    _percentText = [NSString stringWithFormat:@"%ld%%",percent];
     [self setNeedsDisplay];
 }
 
@@ -111,8 +111,8 @@
     self.backgroundColor = [UIColor clearColor];
     NSDictionary* attrs =@{NSForegroundColorAttributeName:self.cirleColor,
                            NSFontAttributeName:self.percentFont};
-    CGSize textSize = [_text sizeWithFont:self.percentFont constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
-    [_text drawAtPoint:CGPointMake((self.frame.size.width - textSize.width)/2, (self.frame.size.height - textSize.height)/2) withAttributes:attrs];
+    CGSize textSize = [_percentText sizeWithFont:self.percentFont constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
+    [_percentText drawAtPoint:CGPointMake((self.frame.size.width - textSize.width)/2, (self.frame.size.height - textSize.height)/2) withAttributes:attrs];
 }
 
 
