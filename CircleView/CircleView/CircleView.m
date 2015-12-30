@@ -38,7 +38,7 @@
     _lineWidth = 25;
     _cirleColor = RGBA(116, 201, 0, 1);
     _percentFont = [UIFont fontWithName:@"Arial"size:17];
-
+    _animationTime = 1.5;
 }
 
 /**
@@ -96,7 +96,7 @@
     
     //动画
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    pathAnimation.duration = 1.5;
+    pathAnimation.duration = self.animationTime;
     pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     pathAnimation.fromValue = [NSNumber numberWithFloat:0];
     pathAnimation.toValue = [NSNumber numberWithFloat:1];
@@ -110,8 +110,7 @@
     [super drawRect:rect];
     self.backgroundColor = [UIColor clearColor];
     NSDictionary* attrs =@{NSForegroundColorAttributeName:self.cirleColor,
-                           NSFontAttributeName:self.percentFont,
-                           }; //在词典中加入文本的颜色 字体 大小
+                           NSFontAttributeName:self.percentFont};
     CGSize textSize = [_text sizeWithFont:self.percentFont constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
     [_text drawAtPoint:CGPointMake((self.frame.size.width - textSize.width)/2, (self.frame.size.height - textSize.height)/2) withAttributes:attrs];
 }

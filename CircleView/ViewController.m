@@ -25,7 +25,8 @@
 //    circleView.lineWidth = 25;
 //    circleView.cirleColor = [UIColor orangeColor];
 //    circleView.percentFont = [UIFont boldSystemFontOfSize:20];
-    [circleView makeCircle:44];
+//    circleView.animationTime = 1;
+    [circleView makeCircle:28];
     [self.view addSubview:circleView];
     
     
