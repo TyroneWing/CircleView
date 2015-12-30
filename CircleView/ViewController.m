@@ -22,6 +22,9 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     circleView = [[CircleView alloc] initWithFrame:CGRectMake(100, 100, 120, 120)];
+//    circleView.lineWidth = 25;
+//    circleView.cirleColor = [UIColor orangeColor];
+//    circleView.percentFont = [UIFont boldSystemFontOfSize:20];
     [circleView makeCircle:44];
     [self.view addSubview:circleView];
     

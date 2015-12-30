@@ -10,13 +10,15 @@
 
 #define RGBA(r,g,b,a)      [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
 #define pi 3.14159265359
-#define DEGREES_DefaultStart(degrees)  ((pi * (degrees+270))/ 180) //默认270度为开始的位置
-#define DEGREES_TO_RADIANS(degrees)  ((pi * degrees)/ 180)         //转化为度
+#define DEGREES_DefaultStart(degrees)  ((pi * (degrees+270))/180) //默认270度为开始的位置
+#define DEGREES_TO_RADIANS(degrees)  ((pi * degrees)/180)         //转化为度
 
 @interface CircleView ()
 @property (nonatomic, assign) NSString *text;
 @property (nonatomic, assign) CGFloat endDegree;
 @property (nonatomic, strong) CAShapeLayer *animtionLayer;
+@property (nonatomic, strong) CAShapeLayer *edgeLayer;
+
 @end
 
 @implementation CircleView
@@ -25,56 +27,58 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        [self drawCircle];
-        _text = @"0%";
+        [self setupDefault];
     }
     return self;
 }
 
-//初始化
--(void)drawCircle{
-    
-    //边缘线
-    UIBezierPath *edgePath = [UIBezierPath bezierPath];
-    [edgePath addArcWithCenter:CGPointMake(self.frame.size.width*0.5, self.frame.size.height * 0.5) radius:self.frame.size.width * 0.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
-    
-    CAShapeLayer *edgeLayer = [CAShapeLayer layer];
-    edgeLayer.path = edgePath.CGPath;
-    edgeLayer.fillColor = self.backgroundColor.CGColor;
-    edgeLayer.strokeColor = RGBA(240, 240, 240, 1).CGColor;
-    edgeLayer.lineWidth = 20;
-    edgeLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    [self.layer addSublayer:edgeLayer];
-    
-//    //边缘环
-//    for (NSInteger i = 0; i < 10; i++) {
-//        CGFloat startAngle =  DEGREES_DefaultStart(i * 36) ;
-//        CGFloat endAngle = DEGREES_DefaultStart((i+1) * 36) - DEGREES_TO_RADIANS(1);
-//        
-//        UIBezierPath *ringPath = [UIBezierPath bezierPath];
-//        [ringPath addArcWithCenter:CGPointMake(self.frame.size.width*0.5, self.frame.size.height * 0.5) radius:self.frame.size.width * 0.5 - (15*0.5 + 2*0.5) startAngle:startAngle endAngle:endAngle clockwise:YES];
-//        
-//        CAShapeLayer *ringLayer = [CAShapeLayer layer];
-//        ringLayer.path = ringPath.CGPath;
-//        ringLayer.fillColor = self.backgroundColor.CGColor;
-//        ringLayer.strokeColor = RGBA(189, 189, 189, 1).CGColor;
-//        ringLayer.lineWidth = 15;
-//        ringLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-//        [self.layer addSublayer:ringLayer];
-//    }
-    
+- (void)setupDefault
+{
+    _text = @"0%";
+    _lineWidth = 25;
+    _cirleColor = RGBA(116, 201, 0, 1);
+    _percentFont = [UIFont fontWithName:@"Arial"size:17];
+
 }
 
-//加入圆弧layer
+/**
+ *  底层背景灰色圆
+ */
+-(void)drawBackCircle{
+
+    UIBezierPath *edgePath = [UIBezierPath bezierPath];
+    [edgePath addArcWithCenter:CGPointMake(self.frame.size.width*0.5, self.frame.size.height * 0.5) radius:self.frame.size.width * 0.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
+
+    if(!self.animtionLayer){
+        self.edgeLayer = [CAShapeLayer layer];
+        self.edgeLayer.path = edgePath.CGPath;
+        self.edgeLayer.fillColor = self.backgroundColor.CGColor;
+        self.edgeLayer.strokeColor = RGBA(240, 240, 240, 1).CGColor;
+        self.edgeLayer.lineWidth = self.lineWidth;
+        self.edgeLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        [self.layer addSublayer:self.edgeLayer];
+    }
+}
+
+
+/**
+ *  设置百分比
+ *
+ *  @param percent 百分比
+ */
 -(void)makeCircle:(NSInteger)percent {
     
     self.endDegree = DEGREES_DefaultStart(percent/100.0 * 360);
-    [self addCircle];
+    [self drawBackCircle];
+    [self addPercentCircle];
     _text = [NSString stringWithFormat:@"%ld%%",percent];
     [self setNeedsDisplay];
 }
 
--(void)addCircle{
+/**
+ *  画百分比圆弧
+ */
+-(void)addPercentCircle{
     
     UIBezierPath *animationPath = [UIBezierPath bezierPath];
     [animationPath addArcWithCenter:CGPointMake(self.frame.size.width*0.5, self.frame.size.height * 0.5) radius:self.frame.size.width * 0.5 startAngle:DEGREES_DefaultStart(0) endAngle:self.endDegree clockwise:YES];
@@ -83,8 +87,8 @@
     if(!self.animtionLayer){
         self.animtionLayer = [CAShapeLayer layer];
         self.animtionLayer.fillColor = self.backgroundColor.CGColor;
-        self.animtionLayer.strokeColor = RGBA(116, 201, 0, 1).CGColor;
-        self.animtionLayer.lineWidth = 20;
+        self.animtionLayer.strokeColor = self.cirleColor.CGColor;
+        self.animtionLayer.lineWidth = self.lineWidth;
         self.animtionLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         [self.layer addSublayer:self.animtionLayer];
     }
@@ -98,7 +102,6 @@
     pathAnimation.toValue = [NSNumber numberWithFloat:1];
     pathAnimation.autoreverses = NO;
     [self.animtionLayer addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
-    
 }
 
 
@@ -106,23 +109,14 @@
 {
     [super drawRect:rect];
     self.backgroundColor = [UIColor clearColor];
-    UIColor *stringColor = RGBA(116, 201, 0, 1);//设置文本的颜色
-    UIFont *textFont = [UIFont fontWithName:@"Arial"size:17];
-    NSDictionary* attrs =@{NSForegroundColorAttributeName:stringColor,
-                           NSFontAttributeName:textFont,
+    NSDictionary* attrs =@{NSForegroundColorAttributeName:self.cirleColor,
+                           NSFontAttributeName:self.percentFont,
                            }; //在词典中加入文本的颜色 字体 大小
-    CGSize textSize = [_text sizeWithFont:textFont constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize textSize = [_text sizeWithFont:self.percentFont constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
     [_text drawAtPoint:CGPointMake((self.frame.size.width - textSize.width)/2, (self.frame.size.height - textSize.height)/2) withAttributes:attrs];
-    
-    //根据坐标点画在view上
-    //    [attrString drawInRect:CGRectMake(150,120,100,200)withAttributes:attrs]; //给文本限制个矩形边界，防止矩形拉伸；
 }
 
 
-//- (void)setLineWidth:(CGFloat)lineWidth
-//{
-//    self.lineWidth = lineWidth;
-//}
 
 /*
 // Only override drawRect: if you perform custom drawing.

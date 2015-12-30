@@ -10,9 +10,12 @@
 
 @interface CircleView : UIView
 
-//@property (nonatomic, assign) CGFloat lineWidth;
+@property (nonatomic, assign) CGFloat lineWidth;
+@property (nonatomic, strong) UIColor *cirleColor;
+@property (nonatomic, strong) UIFont *percentFont;
 
 
 //加入圆弧layer
 -(void)makeCircle:(NSInteger)percent;
+
 @end
