@@ -111,8 +111,12 @@
     self.backgroundColor = [UIColor clearColor];
     NSDictionary* attrs =@{NSForegroundColorAttributeName:self.cirleColor,
                            NSFontAttributeName:self.percentFont};
-    CGSize textSize = [_percentText sizeWithFont:self.percentFont constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
-    [_percentText drawAtPoint:CGPointMake((self.frame.size.width - textSize.width)/2, (self.frame.size.height - textSize.height)/2) withAttributes:attrs];
+    //ios7 之前用法
+//    CGSize percentTextSize = [_percentText sizeWithFont:self.percentFont constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
+    //ios7 之后用法
+    CGSize percentTextSize = [_percentText boundingRectWithSize:self.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+    
+    [_percentText drawAtPoint:CGPointMake((self.frame.size.width - percentTextSize.width)/2, (self.frame.size.height - percentTextSize.height)/2) withAttributes:attrs];
 }
 
 

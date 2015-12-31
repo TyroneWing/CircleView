@@ -30,21 +30,22 @@
     [self.view addSubview:circleView];
     
     
-    UIButton *_mdsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _mdsBtn.frame = CGRectMake(50, 350, 100, 30);
-    [_mdsBtn setTitle:@"change" forState:UIControlStateNormal];
-    _mdsBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [_mdsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_mdsBtn addTarget:self action:@selector(mdsBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_mdsBtn];
+    UIButton *percentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    percentBtn.frame = CGRectMake(30, 30, 100, 30);
+    [percentBtn setTitle:@"修改百分比" forState:UIControlStateNormal];
+    percentBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [percentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [percentBtn addTarget:self action:@selector(percentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:percentBtn];
 }
 
-- (void)mdsBtnClick:(UIButton *)btn
+- (void)percentBtnClick:(UIButton *)btn
 {
     int per = arc4random()%100;
     [circleView makeCircle:per];
-    [btn setTitle:[NSString stringWithFormat:@"%d",per] forState:UIControlStateNormal];
+    [btn setTitle:[NSString stringWithFormat:@"%d%%",per] forState:UIControlStateNormal];
 }
+
 
 
 - (void)didReceiveMemoryWarning {

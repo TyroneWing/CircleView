@@ -220,6 +220,7 @@
 				TargetAttributes = {
 					19C3189A1C21538F00E6BF0B = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = JJKBD98ZY2;
 					};
 					19C318B31C21538F00E6BF0B = {
 						CreatedOnToolsVersion = 7.1;
@@ -427,11 +428,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CircleView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tinckay.CircleView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -439,11 +443,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CircleView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tinckay.CircleView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -514,6 +521,7 @@
 				19C318CA1C21538F00E6BF0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		19C318CB1C21538F00E6BF0B /* Build configuration list for PBXNativeTarget "CircleViewTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +530,7 @@
 				19C318CD1C21538F00E6BF0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		19C318CE1C21538F00E6BF0B /* Build configuration list for PBXNativeTarget "CircleViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +539,7 @@
 				19C318D01C21538F00E6BF0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
