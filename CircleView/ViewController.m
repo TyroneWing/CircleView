@@ -12,8 +12,8 @@
 
 @interface ViewController ()
 {
-    CircleView *circleView;
     BarView *bar;
+    CircleView *circleView;
 }
 @end
 
@@ -24,13 +24,10 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     circleView = [[CircleView alloc] initWithFrame:CGRectMake(160, 80, 120, 120)];
-//    circleView.lineWidth = 25;
-//    circleView.cirleColor = [UIColor orangeColor];
-//    circleView.percentFont = [UIFont boldSystemFontOfSize:20];
-//    circleView.animationTime = 1;
+    circleView.lineWidth = 30;
     [circleView makeCircle:28];
     [self.view addSubview:circleView];
-    
+
     bar = [[BarView alloc] initWithFrame:CGRectMake(50, 60, 50, 150)];
     bar.percent = 0.28;
     bar.backgroundColor = [UIColor lightGrayColor];

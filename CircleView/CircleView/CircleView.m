@@ -9,10 +9,7 @@
 #import "CircleView.h"
 
 #define RGBA(r,g,b,a)      [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
-#define pi 3.14159265359
-#define DEGREES_DefaultStart(degrees)  ((pi * (degrees+270))/180) //默认270度为开始的位置
-#define DEGREES_TO_RADIANS(degrees)  ((pi * degrees)/180)         //转化为度
-
+#define DEGREES_DefaultStart(degrees)  ((M_PI * (degrees+270))/180)
 @interface CircleView ()
 @property (nonatomic, copy) NSString *percentText;
 @property (nonatomic, assign) CGFloat endDegree;
@@ -48,7 +45,6 @@
 
     UIBezierPath *edgePath = [UIBezierPath bezierPath];
     [edgePath addArcWithCenter:CGPointMake(self.frame.size.width*0.5, self.frame.size.height * 0.5) radius:self.frame.size.width * 0.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
-
     if(!self.animtionLayer){
         self.edgeLayer = [CAShapeLayer layer];
         self.edgeLayer.path = edgePath.CGPath;
@@ -108,13 +104,10 @@
 {
     [super drawRect:rect];
     self.backgroundColor = [UIColor clearColor];
+    
     NSDictionary* attrs =@{NSForegroundColorAttributeName:self.cirleColor,
                            NSFontAttributeName:self.percentFont};
-    //ios7 之前用法
-//    CGSize percentTextSize = [_percentText sizeWithFont:self.percentFont constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
-    //ios7 之后用法
     CGSize percentTextSize = [_percentText boundingRectWithSize:self.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
-    
     [_percentText drawAtPoint:CGPointMake((self.frame.size.width - percentTextSize.width)/2, (self.frame.size.height - percentTextSize.height)/2) withAttributes:attrs];
 }
 
