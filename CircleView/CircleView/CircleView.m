@@ -8,14 +8,16 @@
 
 #import "CircleView.h"
 
-#define RGBA(r,g,b,a)      [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
+#define RGBA(r,g,b,a) [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
 #define DEGREES_DefaultStart(degrees)  ((M_PI * (degrees+270))/180)
 @interface CircleView ()
+{
+    CABasicAnimation *pathAnimation;
+}
 @property (nonatomic, copy) NSString *percentText;
 @property (nonatomic, assign) CGFloat endDegree;
 @property (nonatomic, strong) CAShapeLayer *animtionLayer;
 @property (nonatomic, strong) CAShapeLayer *edgeLayer;
-
 @end
 
 @implementation CircleView
@@ -25,8 +27,18 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         [self setupDefault];
+        [self setupAnimation];
     }
     return self;
+}
+- (void)setupAnimation
+{
+    pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    pathAnimation.duration = self.animationTime;
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    pathAnimation.fromValue = [NSNumber numberWithFloat:0];
+    pathAnimation.toValue = [NSNumber numberWithFloat:1];
+    pathAnimation.autoreverses = NO;
 }
 
 - (void)setupDefault
@@ -89,13 +101,6 @@
         [self.layer addSublayer:self.animtionLayer];
     }
     self.animtionLayer.path = animationPath.CGPath;
-    
-    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    pathAnimation.duration = self.animationTime;
-    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    pathAnimation.fromValue = [NSNumber numberWithFloat:0];
-    pathAnimation.toValue = [NSNumber numberWithFloat:1];
-    pathAnimation.autoreverses = NO;
     [self.animtionLayer addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
 }
 
