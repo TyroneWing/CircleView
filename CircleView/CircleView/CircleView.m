@@ -94,7 +94,6 @@
     }
     self.animtionLayer.path = animationPath.CGPath;
     
-    //动画
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     pathAnimation.duration = self.animationTime;
     pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];

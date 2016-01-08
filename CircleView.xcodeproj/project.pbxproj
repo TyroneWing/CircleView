@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19733D191C3F907300D11AF4 /* BarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19733D181C3F907300D11AF4 /* BarView.m */; };
 		19C318A01C21538F00E6BF0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3189F1C21538F00E6BF0B /* main.m */; };
 		19C318A31C21538F00E6BF0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C318A21C21538F00E6BF0B /* AppDelegate.m */; };
 		19C318A61C21538F00E6BF0B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C318A51C21538F00E6BF0B /* ViewController.m */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19733D171C3F907300D11AF4 /* BarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarView.h; sourceTree = "<group>"; };
+		19733D181C3F907300D11AF4 /* BarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarView.m; sourceTree = "<group>"; };
 		19C3189B1C21538F00E6BF0B /* CircleView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19C3189F1C21538F00E6BF0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		19C318A11C21538F00E6BF0B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +84,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19733D161C3F907300D11AF4 /* BarView */ = {
+			isa = PBXGroup;
+			children = (
+				19733D171C3F907300D11AF4 /* BarView.h */,
+				19733D181C3F907300D11AF4 /* BarView.m */,
+			);
+			path = BarView;
+			sourceTree = "<group>";
+		};
 		19C318921C21538E00E6BF0B = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +122,7 @@
 				19C318A51C21538F00E6BF0B /* ViewController.m */,
 				19C318A71C21538F00E6BF0B /* Main.storyboard */,
 				19C318AA1C21538F00E6BF0B /* Assets.xcassets */,
+				19733D161C3F907300D11AF4 /* BarView */,
 				19C318D41C2153FA00E6BF0B /* CircleView */,
 				19C318AC1C21538F00E6BF0B /* LaunchScreen.storyboard */,
 				19C318AF1C21538F00E6BF0B /* Info.plist */,
@@ -288,6 +301,7 @@
 				19C318A61C21538F00E6BF0B /* ViewController.m in Sources */,
 				19C318A31C21538F00E6BF0B /* AppDelegate.m in Sources */,
 				19C318A01C21538F00E6BF0B /* main.m in Sources */,
+				19733D191C3F907300D11AF4 /* BarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
